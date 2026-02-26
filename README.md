@@ -1,12 +1,12 @@
-# Festigo 
-Insert Description:
+## festigo-app
+Insert description:
 
-# Contributions
+## Group Contributions
 
-## Zach Kolbe
+### Zach
 
-## Matt Mattera
+### Matt
 
-## Delaney Benjamin
+### Delaney
 
-## Diane Akpovwa
+### Diane
