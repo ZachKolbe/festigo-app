@@ -22,6 +22,35 @@ public class EventModel {
         this.festival_id = festival_id;
     }
 
+    // Getters
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getEvent_type() {
+        return event_type;
+    }
+
+    public LocalDateTime getStart_time() {
+        return start_time;
+    }
+
+    public LocalDateTime getEnd_time() {
+        return end_time;
+    }
+
+    public int getOrganzier_id() {
+        return organzier_id;
+    }
+
+    public int getFestivalId() {
+        return festival_id;
+    }
+
     @Override
     public String toString() {
         return "EventModel {\n" + "id=" + id + ", title=" + title + ", event_type=" + event_type +
