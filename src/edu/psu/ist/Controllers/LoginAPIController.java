@@ -15,7 +15,7 @@ public class LoginAPIController {
 
     //POST User
     // Changed signature to pass in the user model instead of individual parameters
-    public boolean postUsers (UserModel user)
+    public boolean postUsers(UserModel user)
     {
          System.out.println("LoginAPIController.addUser called: " + user.toString());
 
