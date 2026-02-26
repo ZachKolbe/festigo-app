@@ -5,16 +5,17 @@ import edu.psu.ist.Models.UserModel;
 public class LoginAPIController {
 
     //GET User Stub
-    public UserModel getUser(String userID) 
+    public UserModel getUsersById(String user_id)
     {
-        System.out.println("LoginAPIController.getUser called with userID: " + userID);
-        var myUser = new UserModel(userID, "TestFName", "TestLName");
+        System.out.println("LoginAPIController.getUser called with userID: " + user_id);
+        var myUser = new UserModel(user_id, "TestFName", "TestLName");
 
         return myUser ;
     }
 
     //POST User
-    public boolean addUser (UserModel user)
+    // Changed signature to pass in the user model instead of individual parameters
+    public boolean postUsers (UserModel user)
     {
          System.out.println("LoginAPIController.addUser called: " + user.toString());
 
