@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/festigo-app.iml" filepath="$PROJECT_DIR$/festigo-app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/testharness/testharness.iml" filepath="$PROJECT_DIR$/testharness/testharness.iml" />
+      <module fileurl="file://$PROJECT_DIR$/festival-app.iml" filepath="$PROJECT_DIR$/festival-app.iml" />
     </modules>
   </component>
 </project>
