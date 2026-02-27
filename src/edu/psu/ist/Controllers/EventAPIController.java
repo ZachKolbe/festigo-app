@@ -7,12 +7,12 @@ public class EventAPIController {
     // Admin
     //POST
     public boolean addEvent(EventModel event) {
-        System.out.println(event.toString());
+        System.out.println("EventAPIController.addEvent called: " + event.toString());
         return true; // success
     }
     //PUT
     public boolean updateEvent(EventModel event) {
-        System.out.println(event.toString());
+        System.out.println("EventAPIController.updateEvent called: " + event.toString());
         return true;
     }
 
@@ -25,7 +25,7 @@ public class EventAPIController {
     //Users
     //POST
     public boolean addToCalendar(EventModel event, String userId) {
-        System.out.println(event.toString() + " added to user calendar: " + userId);
+        System.out.println("EventAPIController.addToCalendar called: " + event.toString() + " added to user calendar: " + userId);
         return true;
     }
 

@@ -1,7 +1,7 @@
 package edu.psu.ist.Models;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 public class EventModel {
     private int id;

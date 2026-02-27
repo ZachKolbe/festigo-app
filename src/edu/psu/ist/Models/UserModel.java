@@ -14,8 +14,8 @@ public class UserModel {
     }
 
     @Override
-public String toString() {
-    return "UserModel {\n" + "userid=" + username +  ",\n" + "firstName=" + firstName + ",\n" + "lastName=" + lastName + "}";
+    public String toString() {
+        return "UserModel {\n" + "userid=" + username +  ",\n" + "firstName=" + firstName + ",\n" + "lastName=" + lastName + "}";
 }
 
 }

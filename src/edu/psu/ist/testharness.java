@@ -1,12 +1,9 @@
 package edu.psu.ist;
 
-import edu.psu.ist.Controllers.EventAPIController;
-import edu.psu.ist.Controllers.LoginAPIController;
-import edu.psu.ist.Models.EventModel;
-import edu.psu.ist.Models.UserModel;
+import edu.psu.ist.Controllers.*;
+import edu.psu.ist.Models.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class testharness {
     
@@ -47,5 +44,37 @@ public class testharness {
     //DELETE
     // Changed name from removeEvent to removeFromCalendar
     EventAPI.removeFromCalendar("abc123", 1);
+
+    //Festival API Calls
+    FestivalAPIController FestivalAPI = new FestivalAPIController();
+
+    //POST
+    FestivalAPI.postFestival(new FestivalModel(1, "Los Angeles", LocalDateTime.now(), LocalDateTime.now().plusDays(2), 1));
+
+    //GET
+    FestivalAPI.getFestivalById(1);
+
+    //GET
+    FestivalAPI.getAllFestivals();
+
+    //PUT
+    FestivalAPI.updateFestival(1);
+
+    //DELETE
+    FestivalAPI.deleteFestival(1);
+
+    //PersonalSchedule API Calls
+    PersonalScheduleAPIController PersonalScheduleAPI = new PersonalScheduleAPIController();
+
+    //POST
+    PersonalScheduleAPI.addToPersonalSchedule(new PersonalScheduleModel(1, 2));
+
+    //GET
+    PersonalScheduleAPI.getPersonalSchedule("abc123");
+
+    //MasterSchedule API Calls
+    MasterScheduleAPIController MasterScheduleAPI = new MasterScheduleAPIController();
+    //GET
+    MasterScheduleAPI.getMasterSchedule(1);
   }
 }

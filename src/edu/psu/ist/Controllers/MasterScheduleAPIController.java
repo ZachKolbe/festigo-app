@@ -1,0 +1,20 @@
+package edu.psu.ist.Controllers;
+
+import edu.psu.ist.Models.EventModel;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MasterScheduleAPIController {
+
+    //GET
+    public List<EventModel> getMasterSchedule(int festival_id) {
+        List<EventModel> eventList = new ArrayList<>();
+        // stubbed data
+        eventList.add(new EventModel(1, "concert", 1, LocalDateTime.now(), LocalDateTime.now().plusDays(1) , 2, 4));
+        eventList.add(new EventModel(2, "concert two", 1, LocalDateTime.now(), LocalDateTime.now().plusDays(1) , 2, 4));
+        System.out.println("MasterScheduleAPIController.getMasterSchedule called: " + " Gathering master schedule " + festival_id);
+        return eventList;
+    }
+}
