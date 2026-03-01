@@ -2,7 +2,7 @@
 This project will house our festival app for our complex software system project.
 
 ## Running the code
-- Run the testharness file which calls our API endpoints. The test data will be printed in the IDE terminal. 
+- Run the testharness file located in src/edu.psu.ist which calls our API endpoints. The test data will be printed in the IDE terminal. 
   - The testharness file calls each endpoint, one with passing parameters and one fail call (there are 17 total endpoints defined below)
   - Endpoints are defined in their related controller file
 
