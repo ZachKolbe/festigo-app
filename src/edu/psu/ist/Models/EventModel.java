@@ -24,7 +24,7 @@ public class EventModel {
 
     @Override
     public String toString() {
-        return "EventModel {\n" + "id=" + id + ", title=" + title + ", event_type=" + event_type +
+        return "EventModel {" + "id=" + id + ", title=" + title + ", event_type=" + event_type +
                 ", start_time=" + start_time + ", end_time=" + end_time + ", organzier_id=" + organzier_id +
                 ", festival_id=" + festival_id + "}";
     }

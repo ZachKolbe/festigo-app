@@ -37,7 +37,7 @@ public class FestivalAPIController {
         festivals.add(new FestivalModel(1, "Los Angeles", LocalDateTime.now(), LocalDateTime.now().plusDays(1), 1));
         festivals.add(new FestivalModel(2, "Pittsburgh", LocalDateTime.now(), LocalDateTime.now().plusDays(1), 1));
         festivals.add(new FestivalModel(3, "New York", LocalDateTime.now(), LocalDateTime.now().plusDays(1), 1));
-        System.out.println("FestivalAPIController.getAllFestivals called returns a list of festivals: " + festivals.toString());
+        System.out.println("PASS - FestivalAPIController.getAllFestivals called returns a list of festivals: " + festivals.toString());
         return festivals;
     }
 

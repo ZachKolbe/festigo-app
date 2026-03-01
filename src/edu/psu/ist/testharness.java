@@ -21,11 +21,11 @@ public class testharness {
 
 
     //POST
-    LoginAPI.postUsers(new UserModel("xyz123", "Joe", "Smith"));
+    LoginAPI.postUsers(new UserModel(1,"abc123", "John", "Doe", "password", 2));
     LoginAPI.postUsers(null); //FAILURE
     
    //PUT
-    LoginAPI.updateUser(new UserModel("xyz123", "Joe", "Smith"));
+    LoginAPI.updateUser(new UserModel(1,"abc123", "John", "Doe", "password", 2));
     LoginAPI.updateUser(null);
 
     //DELETE

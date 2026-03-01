@@ -19,7 +19,7 @@ public class FestivalModel {
 
     @Override
     public String toString() {
-        return "FestivalModel {\n" +"id=" + id + ", location=" + location + ", startDate=" + startDate + ", " +
+        return "FestivalModel {" +"id=" + id + ", location=" + location + ", startDate=" + startDate + ", " +
                 "endDate=" + endDate + ", eventAdmin=" + eventAdmin + "}";
     }
 }

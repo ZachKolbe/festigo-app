@@ -14,7 +14,7 @@ public class LoginAPIController {
         }
 
         System.out.println("PASS - LoginAPIController.getUser called with userID: " + user_id);
-        var myUser = new UserModel(user_id, "TestFName", "TestLName");
+        var myUser = new UserModel(1,"abc123", "John", "Doe", "password", 2);
         return myUser ;
     }
 
