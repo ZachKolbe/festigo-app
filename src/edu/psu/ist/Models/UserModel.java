@@ -21,7 +21,7 @@ public class UserModel {
 
     @Override
     public String toString() {
-        return "UserModel {" + "id=" + id + "userid=" + username + "firstName=" + firstName + "lastName=" + lastName + "password" + password + "role=" + role + "}";
+        return "UserModel {" + "id=" + id + ", userid=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", role=" + role + "}";
 }
 
 }
