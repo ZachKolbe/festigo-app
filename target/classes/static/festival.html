@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Festigo Admin</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            background:#f4f6f9;
+            margin:40px;
+        }
+
+        h1{
+            text-align:center;
+        }
+
+        .container{
+            max-width:1000px;
+            margin:auto;
+            background:white;
+            padding:25px;
+            border-radius:10px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:10px;
+            margin-bottom:20px;
+        }
+
+        input{
+            padding:8px;
+            border-radius:5px;
+            border:1px solid #ccc;
+        }
+
+        button{
+            padding:8px 12px;
+            border:none;
+            border-radius:6px;
+            background:#007bff;
+            color:white;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#0056b3;
+        }
+
+        .delete-btn{
+            background:#dc3545;
+        }
+
+        .delete-btn:hover{
+            background:#a71d2a;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        th{
+            background:#007bff;
+            color:white;
+            padding:10px;
+        }
+
+        td{
+            padding:8px;
+            border-bottom:1px solid #ddd;
+            text-align:center;
+        }
+
+        tr:hover{
+            background:#f1f1f1;
+        }
+
+        .actions{
+            display:flex;
+            justify-content:center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    const BASE_URL = "http://localhost:8080";
+
+    function App(){
+
+        const [festivals,setFestivals] = React.useState([]);
+
+        const [festivalName,setFestivalName] = React.useState("");
+        const [location,setLocation] = React.useState("");
+        const [startDate,setStartDate] = React.useState("");
+        const [endDate,setEndDate] = React.useState("");
+        const [eventAdmin,setEventAdmin] = React.useState("");
+
+        async function loadFestivals(){
+            const res = await fetch(`${BASE_URL}/festivals`);
+            const data = await res.json();
+            setFestivals(data);
+        }
+
+        async function createFestival(){
+
+            const festival = {
+                festivalName: festivalName,
+                location: location,
+                startDate: startDate + ":00",
+                endDate: endDate + ":00",
+                eventAdmin: parseInt(eventAdmin)
+            };
+
+            await fetch(`${BASE_URL}/festivals`,{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(festival)
+            });
+
+            setFestivalName("");
+            setLocation("");
+            setStartDate("");
+            setEndDate("");
+            setEventAdmin("");
+
+            loadFestivals();
+        }
+
+        async function deleteFestival(id){
+
+            if(!confirm("Delete this festival?")) return;
+
+            await fetch(`${BASE_URL}/festivals/${id}`,{
+                method:"DELETE"
+            });
+
+            loadFestivals();
+        }
+
+        React.useEffect(()=>{
+            loadFestivals();
+        },[]);
+
+        return(
+
+            <div className="container">
+
+                <h1>Festigo Festival Admin</h1>
+
+                <div className="form-grid">
+
+                    <input
+                        placeholder="Festival Name"
+                        value={festivalName}
+                        onChange={e=>setFestivalName(e.target.value)}
+                    />
+
+                    <input
+                        placeholder="Location"
+                        value={location}
+                        onChange={e=>setLocation(e.target.value)}
+                    />
+
+                    <input
+                        type="datetime-local"
+                        value={startDate}
+                        onChange={e=>setStartDate(e.target.value)}
+                    />
+
+                    <input
+                        type="datetime-local"
+                        value={endDate}
+                        onChange={e=>setEndDate(e.target.value)}
+                    />
+
+                    <input
+                        placeholder="Event Admin ID"
+                        value={eventAdmin}
+                        onChange={e=>setEventAdmin(e.target.value)}
+                    />
+
+                    <button onClick={createFestival}>
+                        Add Festival
+                    </button>
+
+                </div>
+
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Admin</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {festivals.map(festival => (
+
+                        <tr key={festival.id}>
+
+                            <td>{festival.id}</td>
+                            <td>{festival.festivalName}</td>
+                            <td>{festival.location}</td>
+                            <td>{festival.startDate}</td>
+                            <td>{festival.endDate}</td>
+                            <td>{festival.eventAdmin}</td>
+
+                            <td>
+                                <div className="actions">
+                                    <button
+                                        className="delete-btn"
+                                        onClick={()=>deleteFestival(festival.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    ))}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        )
+
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App/>)
+
+</script>
+
+</body>
+</html>

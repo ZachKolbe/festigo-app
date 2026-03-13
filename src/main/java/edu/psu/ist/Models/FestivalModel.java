@@ -25,16 +25,20 @@ public class FestivalModel {
     @Column(name = "event_admin")
     private int eventAdmin;
 
+    @Column(name = "festival_name")
+    private String festivalName;
+
     // Required for JPA + JSON
     public FestivalModel() {
     }
 
-    public FestivalModel(int id, String location,
+    public FestivalModel(int id, String location, String festivalName,
                          LocalDateTime startDate,
                          LocalDateTime endDate,
                          int eventAdmin) {
         this.id = id;
         this.location = location;
+        this.festivalName = festivalName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.eventAdmin = eventAdmin;
@@ -47,6 +51,9 @@ public class FestivalModel {
 
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
+
+    public String getFestivalName() { return festivalName; }
+    public void setFestivalName(String festivalName) { this.festivalName = festivalName; }
 
     public LocalDateTime getStartDate() { return startDate; }
     public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
@@ -62,6 +69,7 @@ public class FestivalModel {
         return "FestivalModel {" +
                 "id=" + id +
                 ", location='" + location + '\'' +
+                ", festivalName='" + festivalName + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", eventAdmin=" + eventAdmin +

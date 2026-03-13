@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/festivals")
 public class FestivalAPIController {
@@ -48,6 +49,7 @@ public class FestivalAPIController {
             FestivalModel festival = existing.get();
 
             festival.setLocation(updatedFestival.getLocation());
+            festival.setFestivalName(updatedFestival.getFestivalName());
             festival.setStartDate(updatedFestival.getStartDate());
             festival.setEndDate(updatedFestival.getEndDate());
             festival.setEventAdmin(updatedFestival.getEventAdmin());
