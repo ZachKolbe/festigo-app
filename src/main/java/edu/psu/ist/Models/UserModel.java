@@ -1,29 +1,40 @@
 package edu.psu.ist.Models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "users")  // Optional but recommended
 public class UserModel {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;   // Use Integer instead of int for JPA
 
     @JsonProperty("username")
+    @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
 
-    @JsonIgnore  // Prevent password from being returned in JSON responses
+    @JsonIgnore  // Never return password in JSON
+    @Column(nullable = false)
     private String password;
 
-    private int role;
+    @Column(nullable = false)
+    private Integer role;  // Use Integer instead of int
 
-    // Required for JSON deserialization
+    // Default constructor (Required by JPA)
     public UserModel() {
     }
 
-    public UserModel(int id, String username, String firstName,
-                     String lastName, String password, int role) {
+    public UserModel(Integer id, String username, String firstName,
+                     String lastName, String password, Integer role) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -34,11 +45,11 @@ public class UserModel {
 
     // Getters and Setters
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -74,11 +85,11 @@ public class UserModel {
         this.password = password;
     }
 
-    public int getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(Integer role) {
         this.role = role;
     }
 
@@ -86,9 +97,9 @@ public class UserModel {
     public String toString() {
         return "UserModel {" +
                 "id=" + id +
-                ", username=" + username +
-                ", firstName=" + firstName +
-                ", lastName=" + lastName +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", role=" + role +
                 '}';
     }

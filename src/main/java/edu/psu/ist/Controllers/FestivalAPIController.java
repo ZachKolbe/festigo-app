@@ -1,115 +1,66 @@
 package edu.psu.ist.Controllers;
 
 import edu.psu.ist.Models.FestivalModel;
+import edu.psu.ist.Repositories.FestivalRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/festivals")
 public class FestivalAPIController {
 
+    private final FestivalRepository festivalRepository;
+
+    public FestivalAPIController(FestivalRepository festivalRepository) {
+        this.festivalRepository = festivalRepository;
+    }
+
     // ---------------- CREATE ----------------
-
     @PostMapping
-    public boolean postFestival(@RequestBody FestivalModel festival) {
-
-        if (festival == null) {
-            System.out.println("FAIL - FestivalAPIController.postFestival called: " + festival);
-            return false;
-        }
-
-        System.out.println("PASS - FestivalAPIController.postFestival called: " + festival.toString());
-        return true;
+    public FestivalModel createFestival(@RequestBody FestivalModel festival) {
+        return festivalRepository.save(festival);
     }
 
     // ---------------- GET BY ID ----------------
-
     @GetMapping("/{id}")
     public FestivalModel getFestivalById(@PathVariable int id) {
 
-        if (id <= 0) {
-            System.out.println("FAIL - FestivalAPIController.getFestivalById called: " + id);
-            return null;
-        }
+        Optional<FestivalModel> festival = festivalRepository.findById(id);
 
-        FestivalModel festival = new FestivalModel(
-                1,
-                "Los Angeles",
-                LocalDateTime.now(),
-                LocalDateTime.now().plusDays(1),
-                1
-        );
-
-        System.out.println("PASS - FestivalAPIController.getFestivalById called with id: "
-                + id + " Festival returned: " + festival.toString());
-
-        return festival;
+        return festival.orElse(null);
     }
 
     // ---------------- GET ALL ----------------
-
     @GetMapping
     public List<FestivalModel> getAllFestivals() {
-
-        List<FestivalModel> festivals = new ArrayList<>();
-
-        festivals.add(new FestivalModel(
-                1,
-                "Los Angeles",
-                LocalDateTime.now(),
-                LocalDateTime.now().plusDays(1),
-                1
-        ));
-
-        festivals.add(new FestivalModel(
-                2,
-                "Pittsburgh",
-                LocalDateTime.now(),
-                LocalDateTime.now().plusDays(1),
-                1
-        ));
-
-        festivals.add(new FestivalModel(
-                3,
-                "New York",
-                LocalDateTime.now(),
-                LocalDateTime.now().plusDays(1),
-                1
-        ));
-
-        System.out.println("PASS - FestivalAPIController.getAllFestivals called returns: " + festivals);
-
-        return festivals;
+        return festivalRepository.findAll();
     }
 
     // ---------------- UPDATE ----------------
-
     @PutMapping("/{id}")
-    public boolean updateFestival(@PathVariable int id, @RequestBody FestivalModel festival) {
+    public FestivalModel updateFestival(@PathVariable int id, @RequestBody FestivalModel updatedFestival) {
 
-        if (id <= 0) {
-            System.out.println("FAIL - FestivalAPIController.updateFestival called: " + id);
-            return false;
+        Optional<FestivalModel> existing = festivalRepository.findById(id);
+
+        if (existing.isPresent()) {
+            FestivalModel festival = existing.get();
+
+            festival.setLocation(updatedFestival.getLocation());
+            festival.setStartDate(updatedFestival.getStartDate());
+            festival.setEndDate(updatedFestival.getEndDate());
+            festival.setEventAdmin(updatedFestival.getEventAdmin());
+
+            return festivalRepository.save(festival);
         }
 
-        System.out.println("PASS - Updated festival id: " + id);
-        return true;
+        return null;
     }
 
     // ---------------- DELETE ----------------
-
     @DeleteMapping("/{id}")
-    public boolean deleteFestival(@PathVariable int id) {
-
-        if (id <= 0) {
-            System.out.println("FAIL - FestivalAPIController.deleteFestival called: " + id);
-            return false;
-        }
-
-        System.out.println("PASS - Deleted festival id: " + id);
-        return true;
+    public void deleteFestival(@PathVariable int id) {
+        festivalRepository.deleteById(id);
     }
 }
